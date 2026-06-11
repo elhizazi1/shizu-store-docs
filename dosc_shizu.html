@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shizu_store.json — Developer Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Shizu Store Developer Docs
+  </div>
+  <h1>
+    <span class="mono">shizu_store.json</span><br />
+    Reference Guide
+  </h1>
+  <p class="subtitle">
+    Everything you need to know to publish your Shizuku-based app on the Shizu CoreFetch Store.
+    Configure your app, developer portfolio, localized text, and target your custom ads.
+  </p>
+  <div class="header-actions">
+    <a href="shizu_store.json" class="btn btn-primary">
+      <span>📄</span> View Example JSON
+    </a>
+    <a href="schema.json" class="btn btn-secondary">
+      <span>✅</span> Download Schema
+    </a>
+    <a href="README.md" class="btn btn-secondary">
+      <span>📖</span> README
+    </a>
+  </div>
+    <div class="header-actions">
+    <a href="builder.html" class="btn btn-primary">
+      <span>🛠️</span> Open JSON Builder
+    </a>
+    <a href="shizu_store.json" class="btn btn-secondary" target="_blank">
+      <span>📄</span> Example JSON
+    </a>
+    <a href="schema.json" class="btn btn-secondary" target="_blank">
+      <span>✅</span> Schema
+    </a>
+  </div>
+
+</header>
+
+<!-- NAV -->
+<nav>
+  <a href="#what-is">What Is It?</a>
+  <a href="#placement">Placement</a>
+  <a href="#required">Required Fields</a>
+  <a href="#optional">Optional Fields</a>
+  <a href="#ads">Ads & Monetization</a>
+  <a href="#locales">Languages</a>
+  <a href="#architecture">Architecture & Disclaimer</a>
+  <a href="#validate">Validation</a>
+  <a href="#mistakes">Mistakes</a>
+  <a href="#security">Security</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- WHAT IS IT -->
+  <section id="what-is">
+    <h2><span class="icon">📦</span> What is shizu_store.json?</h2>
+    <p>
+      <code>shizu_store.json</code> is a manifest file that tells the <strong>Shizu CoreFetch</strong> Android app
+      everything it needs to know about your application — its name, description, icon, developer info, and your custom ads.
+    </p>
+    <p>
+      The Shizu Store is a decentralized Android app ecosystem designed specifically for <strong>Shizuku-based apps</strong>.
+      It uses Shizuku's elevated permissions to install APKs <em>silently</em>, without requiring root access.
+      Developers add a <code>shizu_store.json</code> file to their GitHub repository, and the store discovers
+      and displays their app automatically.
+    </p>
+    <div class="callout callout-info">
+      <span class="callout-icon">ℹ️</span>
+      <div>
+        <p>The store scans for a file named <strong>exactly</strong> <code>shizu_store.json</code> at the root of your GitHub repository. The filename is case-sensitive — do not rename it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLACEMENT -->
+  <section id="placement">
+    <h2><span class="icon">📁</span> File Placement</h2>
+    <p>Place <code>shizu_store.json</code> at the <strong>root level</strong> of your GitHub repository — the same level as your <code>README.md</code>.</p>
+
+    <div class="code-wrap">
+      <span class="code-label">Repository Structure</span>
+      <pre><span class="c"># ✅  Correct — file is at the root</span>
+my-shizuku-app/
+├── <span class="s">shizu_store.json</span>   ← here
+├── README.md
+├── app/
+│   └── src/...
+└── build.gradle
+
+<span class="c"># ❌  Wrong — file is in a subdirectory</span>
+my-shizuku-app/
+├── docs/
+│   └── shizu_store.json   ← NOT here
+└── ...</pre>
+    </div>
+
+    <p>
+      The raw URL to your file will be something like:<br />
+      <code>https://raw.githubusercontent.com/&lt;user&gt;/&lt;repo&gt;/main/shizu_store.json</code>
+    </p>
+  </section>
+
+  <!-- REQUIRED FIELDS -->
+  <section id="required">
+    <h2><span class="icon">⚡</span> Required Fields</h2>
+    <p>Your <code>shizu_store.json</code> must include these four fields at minimum. Without them, the app will not be listed in the store.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>app_name</code></td>
+            <td><code>string</code></td>
+            <td>Display name of your application.</td>
+          </tr>
+          <tr>
+            <td><code>package_name</code></td>
+            <td><code>string</code></td>
+            <td>Android package name (e.g. <code>xyz.siwane.myapp</code>). Must be valid Java package format.</td>
+          </tr>
+          <tr>
+            <td><code>short_description</code></td>
+            <td><code>string</code></td>
+            <td>One-line description shown in listings. Max 200 characters.</td>
+          </tr>
+          <tr>
+            <td><code>icon_url</code></td>
+            <td><code>string</code> (URL)</td>
+            <td>Absolute HTTPS URL to your app's icon. Square PNG or WebP recommended.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Minimal valid example</h3>
+    <div class="code-wrap">
+      <span class="code-label">JSON</span>
+      <pre><span class="p">{</span>
+  <span class="k">"app_name"</span><span class="p">:</span> <span class="s">"My Shizuku App"</span><span class="p">,</span>
+  <span class="k">"package_name"</span><span class="p">:</span> <span class="s">"xyz.siwane.myapp"</span><span class="p">,</span>
+  <span class="k">"short_description"</span><span class="p">:</span> <span class="s">"Does something cool with Shizuku."</span><span class="p">,</span>
+  <span class="k">"icon_url"</span><span class="p">:</span> <span class="s">"https://raw.githubusercontent.com/you/repo/main/icon.png"</span>
+<span class="p">}</span></pre>
+    </div>
+  </section>
+
+  <!-- OPTIONAL FIELDS -->
+  <section id="optional">
+    <h2><span class="icon">🔧</span> Extended Fields</h2>
+    <p>These fields enhance how your app appears in the store, including your developer portfolio and community integration.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>detailed_description</code></td><td><code>string</code></td><td>Long-form description. Supports <code>\n</code> and Markdown <code>**bold**</code>.</td></tr>
+          <tr><td><code>developer_message</code></td><td><code>string</code></td><td>A personal message to your users displayed in a dedicated card.</td></tr>
+          <tr><td><code>banner_url</code></td><td><code>string</code></td><td>Absolute URL to a banner image (16:9 recommended).</td></tr>
+          <tr><td><code>screenshots</code></td><td><code>array</code></td><td>Array of absolute URLs to screenshot images.</td></tr>
+          <tr><td><code>repo_url</code></td><td><code>string</code></td><td>Direct link to the GitHub repository.</td></tr>
+          <tr><td><code>app_website</code></td><td><code>string</code></td><td>Official website for your app.</td></tr>
+          <tr><td><code>store_issue_number</code></td><td><code>integer</code></td><td>The GitHub Issue number used to fetch and display user comments natively.</td></tr>
+          <tr><td><code>ad</code></td><td><code>boolean</code></td><td>Set to <code>true</code> to enable custom ad banners in your app details.</td></tr>
+          <tr><td><code>ads</code></td><td><code>array</code></td><td>Array containing your custom ad configurations (See Monetization section).</td></tr>
+          <tr><td><code>developer</code></td><td><code>object</code></td><td>Rich developer portfolio info. See below.</td></tr>
+          <tr><td><code>locales</code></td><td><code>object</code></td><td>Translated strings per language code. See Languages section.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Developer Portfolio Object</h3>
+    <p>The <code>developer</code> object powers the developer dashboard in the store, showing your banner, website, and other apps.</p>
+    <div class="code-wrap">
+      <span class="code-label">JSON</span>
+      <pre><span class="k">"developer"</span><span class="p">: {</span>
+  <span class="k">"name"</span><span class="p">:</span>        <span class="s">"Jamal El Hizazi"</span><span class="p">,</span>
+  <span class="k">"banner_url"</span><span class="p">:</span>  <span class="s">"https://domain.com/coverture.jpg"</span><span class="p">,</span>
+  <span class="k">"account_url"</span><span class="p">:</span> <span class="s">"https://github.com/elhizazi1"</span><span class="p">,</span>
+  <span class="k">"email"</span><span class="p">:</span>       <span class="s">"jamal@elhizazi.me"</span><span class="p">,</span>
+  <span class="k">"website"</span><span class="p">:</span>     <span class="s">"https://siwane.xyz"</span><span class="p">,</span>
+  <span class="k">"portfolio"</span><span class="p">:</span>   <span class="s">"https://jamal.elhizazi.me"</span><span class="p">,</span>
+  <span class="k">"socials"</span><span class="p">: {</span>
+    <span class="k">"facebook"</span><span class="p">:</span>  <span class="s">"https://fb.com/elhizazi2"</span><span class="p">,</span>
+    <span class="k">"instagram"</span><span class="p">:</span> <span class="s">"https://instagram.com/elhizazi1"</span><span class="p">,</span>
+    <span class="k">"x"</span><span class="p">:</span>         <span class="s">"https://x.com/elhizazi1"</span><span class="p">,</span>
+    <span class="k">"youtube"</span><span class="p">:</span>   <span class="s">"https://youtube.com/@si1xyz"</span><span class="p">,</span>
+    <span class="k">"github"</span><span class="p">:</span>    <span class="s">"https://github.com/elhizazi1"</span><span class="p">,</span>
+    <span class="k">"telegram"</span><span class="p">:</span>  <span class="s">"https://t.me/elhizazi1"</span>
+  <span class="p">}</span>
+<span class="p">}</span></pre>
+    </div>
+  </section>
+
+  <!-- ADS & MONETIZATION -->
+  <section id="ads">
+    <h2><span class="icon">📢</span> Ads & Monetization</h2>
+    <p>
+      Shizu CoreFetch empowers developers by allowing them to display their own custom ads directly inside their app's details page. 
+      You keep 100% of the traffic. Set <code>"ad": true</code> and configure the <code>ads</code> array.
+    </p>
+
+    <div class="code-wrap">
+      <span class="code-label">JSON</span>
+      <pre><span class="k">"ad"</span><span class="p">:</span> <span class="b">true</span><span class="p">,</span>
+<span class="k">"ads"</span><span class="p">:</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="k">"position"</span><span class="p">:</span> <span class="s">"top"</span><span class="p">,</span>
+    <span class="k">"image_url"</span><span class="p">:</span> <span class="s">"https://yourdomain.com/ad_top.webp"</span><span class="p">,</span>
+    <span class="k">"target_url"</span><span class="p">:</span> <span class="s">"https://sponsored-link.com"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="k">"position"</span><span class="p">:</span> <span class="s">"bottom"</span><span class="p">,</span>
+    <span class="k">"image_url"</span><span class="p">:</span> <span class="s">"https://yourdomain.com/ad_bottom.jpeg"</span><span class="p">,</span>
+    <span class="k">"target_url"</span><span class="p">:</span> <span class="s">"https://wa.me/123456789"</span>
+  <span class="p">}</span>
+<span class="p">]</span></pre>
+    </div>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">🚫</span>
+      <div>
+        <strong>Ad Policy & Restrictions</strong>
+        <p>Developers have complete freedom to promote their own products, external links, or sponsors. However, the following categories are strictly prohibited: <strong>Gambling, Alcohol, Drugs, Pornography, and Religious disparities/paradoxes</strong>. Violating this policy will result in the immediate blacklisting of the ad or the application from the store ecosystem.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALES -->
+  <section id="locales">
+    <h2><span class="icon">🌐</span> Languages &amp; Locales</h2>
+    <p>
+      The Shizu Store natively supports <strong>9 languages</strong>. Add translated strings under the
+      <code>locales</code> key using BCP 47 language codes. The store will display the appropriate locale
+      based on the user's device language, falling back to <code>en</code> if unavailable.
+    </p>
+
+    <div class="lang-grid">
+      <div class="lang-chip"><span class="code">ar</span><span class="name">Arabic</span></div>
+      <div class="lang-chip"><span class="code">en</span><span class="name">English</span></div>
+      <div class="lang-chip"><span class="code">fr</span><span class="name">French</span></div>
+      <div class="lang-chip"><span class="code">es</span><span class="name">Spanish</span></div>
+      <div class="lang-chip"><span class="code">pt</span><span class="name">Portuguese</span></div>
+      <div class="lang-chip"><span class="code">ru</span><span class="name">Russian</span></div>
+      <div class="lang-chip"><span class="code">hi</span><span class="name">Hindi</span></div>
+      <div class="lang-chip"><span class="code">zh</span><span class="name">Chinese</span></div>
+      <div class="lang-chip"><span class="code">ja</span><span class="name">Japanese</span></div>
+    </div>
+
+    <div class="callout callout-success">
+      <span class="callout-icon">✅</span>
+      <div>
+        <p>You can also add <strong>any other language code</strong> under <code>locales</code> — the schema allows any BCP 47 code. Additional languages beyond the 9 listed may be displayed if the store adds support later.</p>
+      </div>
+    </div>
+
+    <h3>What can be translated?</h3>
+    <p>Each locale object supports these translatable fields:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Field</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><code>app_name</code></td><td>App name in the target language</td></tr>
+          <tr><td><code>short_description</code></td><td>Short listing description</td></tr>
+          <tr><td><code>detailed_description</code></td><td>Long description with formatting</td></tr>
+          <tr><td><code>developer_message</code></td><td>Translated message from the developer</td></tr>
+          <tr><td><code>developer_name</code></td><td>Developer's name in target language (e.g. Arabic)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE & DISCLAIMER -->
+  <section id="architecture">
+    <h2><span class="icon">🏛️</span> Store Architecture & Disclaimer</h2>
+    
+    <p>
+      <strong>Decentralized Fetching:</strong> The Shizu CoreFetch store acts as a bridge. It fetches application metadata and APK releases directly from the developers' GitHub repositories. There is no direct hosting or intervention from the store itself. The ecosystem relies entirely on the open-source community.
+    </p>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">⚖️</span>
+      <div>
+        <strong>Disclaimer of Liability</strong>
+        <p>The creator of the Shizu CoreFetch store (<strong>Jamal El Hizazi</strong>) is not responsible for the functionality, safety, or content of any third-party application published in the store. All responsibility lies solely with the respective app developer.</p>
+        <p>However, the store administration reserves the absolute right to blacklist or block any application or advertisement if a contradiction with the store's policies is discovered, in order to prevent harm to users.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALIDATION -->
+  <section id="validate">
+    <h2><span class="icon">✅</span> Validation</h2>
+    <p>Always validate your <code>shizu_store.json</code> before publishing. Malformed JSON will prevent your app from appearing in the store.</p>
+
+    <h3>Online (recommended)</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Open the JSON Schema Validator</strong>
+          <p>Go to <a href="https://www.jsonschemavalidator.net" target="_blank">jsonschemavalidator.net</a></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Paste the schema</strong>
+          <p>Copy the contents of <a href="schema.json">schema.json</a> into the left (Schema) panel.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Paste your JSON</strong>
+          <p>Copy your <code>shizu_store.json</code> into the right (Input JSON) panel and check for errors.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Command Line with <code>ajv</code></h3>
+    <div class="code-wrap">
+      <span class="code-label">Shell</span>
+      <pre><span class="c"># Install ajv-cli</span>
+npm install -g ajv-cli
+
+<span class="c"># Validate your file</span>
+ajv validate -s schema.json -d shizu_store.json</pre>
+    </div>
+
+    <h3>Python</h3>
+    <div class="code-wrap">
+      <span class="code-label">Python</span>
+      <pre>pip install jsonschema
+
+python3 - &lt;&lt;'EOF'
+import json, jsonschema
+
+with open("schema.json") as f:
+    schema = json.load(f)
+with open("shizu_store.json") as f:
+    data = json.load(f)
+
+jsonschema.validate(data, schema)
+print("✅  Valid!")
+EOF</pre>
+    </div>
+
+    <h3>Quick JSON syntax check</h3>
+    <div class="code-wrap">
+      <span class="code-label">Shell</span>
+      <pre>python3 -m json.tool shizu_store.json &gt; /dev/null &amp;&amp; echo "✅ Valid JSON"</pre>
+    </div>
+  </section>
+
+  <!-- MISTAKES -->
+  <section id="mistakes">
+    <h2><span class="icon">⚠️</span> Common Mistakes</h2>
+
+    <h3>1. Duplicate keys in an object</h3>
+    <p>JSON does not allow duplicate keys inside the same object. Most parsers will silently use the last value, which leads to data loss.</p>
+    <div class="mistake-block">
+      <div class="mistake-label bad">❌ Wrong</div>
+      <pre><span class="p">{</span>
+  <span class="k">"app_name"</span><span class="p">:</span> <span class="s">"My App"</span><span class="p">,</span>
+  <span class="k">"app_name"</span><span class="p">:</span> <span class="s">"My App Again"</span>  <span class="c">← duplicate key!</span>
+<span class="p">}</span></pre>
+    </div>
+
+    <h3>2. Trailing commas</h3>
+    <p>JSON does not allow a comma after the last item in an object or array.</p>
+    <div class="mistake-block">
+      <div class="mistake-label bad">❌ Wrong</div>
+      <pre><span class="p">{</span>
+  <span class="k">"app_name"</span><span class="p">:</span> <span class="s">"My App"</span><span class="p">,</span>
+  <span class="k">"package_name"</span><span class="p">:</span> <span class="s">"xyz.siwane.app"</span><span class="p">,</span>  <span class="c">← trailing comma</span>
+<span class="p">}</span></pre>
+      <div class="mistake-label good" style="margin-top:8px">✅ Correct</div>
+      <pre><span class="p">{</span>
+  <span class="k">"app_name"</span><span class="p">:</span> <span class="s">"My App"</span><span class="p">,</span>
+  <span class="k">"package_name"</span><span class="p">:</span> <span class="s">"xyz.siwane.app"</span>
+<span class="p">}</span></pre>
+    </div>
+
+    <h3>3. Relative URLs</h3>
+    <p>All URL fields (<code>icon_url</code>, <code>banner_url</code>, <code>screenshots</code>, etc.) must be <strong>absolute</strong> HTTPS URLs. Relative paths won't work because the store fetches them remotely.</p>
+    <div class="mistake-block">
+      <div class="mistake-label bad">❌ Wrong</div>
+      <pre><span class="k">"icon_url"</span><span class="p">:</span> <span class="s">"./assets/icon.png"</span></pre>
+      <div class="mistake-label good" style="margin-top:8px">✅ Correct</div>
+      <pre><span class="k">"icon_url"</span><span class="p">:</span> <span class="s">"https://raw.githubusercontent.com/you/repo/main/assets/icon.png"</span></pre>
+    </div>
+
+    <h3>4. Wrong file name or location</h3>
+    <p>The file must be named exactly <code>shizu_store.json</code> (lowercase, with underscore) and placed at the root of the repository.</p>
+  </section>
+
+  <!-- SECURITY -->
+  <section id="security">
+    <h2><span class="icon">🔒</span> Security Notice</h2>
+
+    <div class="callout callout-danger">
+      <span class="callout-icon">⚠️</span>
+      <div>
+        <p><strong>The Shizu Store installs APKs silently using Shizuku's elevated system permissions.</strong> This is a powerful capability — users who add your repository to the store are implicitly trusting you as a developer.</p>
+      </div>
+    </div>
+
+    <p>As a developer listing your app on the Shizu Store, you are agreeing to act responsibly. This means:</p>
+    <ul>
+      <li><strong>Never serve malware or spyware</strong> through your GitHub releases.</li>
+      <li><strong>Be transparent</strong> about what your app does. Accurately describe all Shizuku permissions your app uses.</li>
+      <li><strong>Publish your source code</strong> when possible. Users and reviewers are far more likely to trust open-source apps.</li>
+      <li><strong>Sign your APKs</strong> with a consistent certificate. Never swap a legitimate APK for a malicious one.</li>
+      <li><strong>Notify users of significant changes</strong> via GitHub releases, especially if you are requesting new permissions.</li>
+    </ul>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">🔑</span>
+      <div>
+        <p>Shizuku grants apps ADB-level permissions. Apps running under Shizuku can perform sensitive operations like reading private data, modifying system settings, and managing other apps. Always use the minimum permissions necessary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2><span class="icon">❓</span> FAQ</h2>
+
+    <details>
+      <summary>Do I need to submit my app anywhere to be listed?</summary>
+      <div class="faq-body">
+        <p>The submission process is managed by the Shizu Store itself. Adding a valid <code>shizu_store.json</code> to your repo is the first step. You then typically provide your repository URL to the store or its maintainers to be indexed.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I use a CDN or my own server instead of GitHub raw URLs?</summary>
+      <div class="faq-body">
+        <p>Yes. Any publicly accessible HTTPS URL is valid for all URL fields. GitHub raw URLs are simply the most common choice because the JSON file lives in your GitHub repo.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What happens if a user's device language isn't in my locales?</summary>
+      <div class="faq-body">
+        <p>The store falls back to the root-level (non-localized) values — i.e., whatever you put in <code>app_name</code>, <code>short_description</code>, etc. at the top level of the JSON. We recommend writing those in English.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Do I have to include all 9 languages?</summary>
+      <div class="faq-body">
+        <p>No. You can include as many or as few locales as you want. Any locale you omit will automatically fall back to the root-level values.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do I format descriptions with bold text and line breaks?</summary>
+      <div class="faq-body">
+        <p>Use <code>\n</code> for newlines and <code>**text**</code> for bold text within description strings. These are interpreted by the store when rendering the app's detail page.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>My app doesn't require Shizuku to run — can I still list it?</summary>
+      <div class="faq-body">
+        <p>The store is designed for Shizuku-based apps. You can list it, but be clear in your description that Shizuku is not required for its core functionality.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Is there a file size limit for the JSON?</summary>
+      <div class="faq-body">
+        <p>There is no hard limit documented, but keep the file reasonable. A few kilobytes is typical. Avoid embedding very long strings directly — link to external resources instead.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Can I have multiple apps in the same repository?</summary>
+      <div class="faq-body">
+        <p>No. Each <code>shizu_store.json</code> file represents a single app, and there can only be one per repository root. To list multiple apps, create separate repositories for each.</p>
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    Shizu Store JSON Reference &mdash;
+    <a href="shizu_store.json">Example JSON</a> &middot;
+    <a href="schema.json">Schema</a> &middot;
+    <a href="README.md">README</a>
+  </p>
+  <p style="margin-top:8px; color: #3d4460;">
+    The Shizu Store uses Shizuku for silent APK installation. Developers are responsible for the safety of their apps.
+  </p>
+</footer>
+
+</body>
+</html>

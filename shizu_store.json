@@ -1,0 +1,124 @@
+{
+  "app_name": "[Important] Example Shizuku App",
+  "package_name": "com.example.myshizukuapp",
+  "short_description": "[Important] A short, catchy description of your app in one line.",
+  "detailed_description": "[Optional but Recommended] Welcome to My Shizuku App! This tool helps you manage your device efficiently.\n\n**Features:**\n- Silent installation.\n- Background tasks.",
+  
+  "ad": true,
+  "ads": [
+    {
+      "position": "top",
+      "image_url": "https://example.com/assets/optional_ad_top.webp",
+      "target_url": "https://example.com/optional_sponsored_link"
+    },
+    {
+      "position": "bottom",
+      "image_url": "https://example.com/assets/optional_ad_bottom.jpeg",
+      "target_url": "https://wa.me/123456789"
+    }
+  ],
+  
+  "developer_message": "[Optional] Thank you for using my app! Your support keeps this project alive.",
+  "icon_url": "https://raw.githubusercontent.com/username/repo/main/important_icon.png",
+  "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner.png",
+  "app_website": "https://optional-myapp-website.com",
+  "store_issue_number": 1,
+  
+  "developer": {
+    "name": "[Important] Developer Name",
+    "banner_url": "https://example.com/assets/optional_dev_coverture.jpg",
+    "account_url": "https://github.com/important_username",
+    "email": "optional@example.com",
+    "website": "https://optional-developer-website.com",
+    "portfolio": "https://optional-portfolio.com",
+    "socials": {
+      "facebook": "https://fb.com/optional",
+      "instagram": "https://instagram.com/optional",
+      "x": "https://x.com/optional",
+      "youtube": "https://youtube.com/@optional",
+      "github": "https://github.com/important_username",
+      "telegram": "https://t.me/optional"
+    }
+  },
+  
+  "repo_url": "https://github.com/username/repo",
+  "screenshots": [
+    "https://raw.githubusercontent.com/username/repo/main/optional_screen1.png",
+    "https://raw.githubusercontent.com/username/repo/main/optional_screen2.png"
+  ],
+  
+  "locales": {
+    "ar": {
+      "app_name": "[مهم] اسم التطبيق بالعربية",
+      "short_description": "[مهم] وصف قصير وجذاب لتطبيقك في سطر واحد.",
+      "detailed_description": "[اختياري ومستحب] مرحباً بك في تطبيقي! الأداة تعمل كلياً عبر Shizuku.",
+      "developer_message": "[اختياري] شكراً لاستخدامكم تطبيقي! دعمكم هو ما يبقي هذا المشروع حياً.",
+      "developer_name": "[مهم] اسم المطور بالعربية",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_ar.png",
+      "changelog": "[اختياري] تحسينات عامة وإصلاح للأخطاء."
+    },
+    "fr": {
+      "app_name": "[Important] Nom de l'application",
+      "short_description": "[Important] Une description courte et accrocheuse.",
+      "detailed_description": "[Optionnel et Recommandé] Bienvenue dans mon application ! Alimenté par Shizuku.",
+      "developer_message": "[Optionnel] Merci d'utiliser mon application !",
+      "developer_name": "[Important] Nom du développeur",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_fr.png",
+      "changelog": "[Optionnel] Améliorations générales."
+    },
+    "es": {
+      "app_name": "[Importante] Nombre de la aplicación",
+      "short_description": "[Importante] Una descripción breve y atractiva.",
+      "detailed_description": "[Opcional y Recomendado] ¡Bienvenido a mi aplicación! Desarrollado por Shizuku.",
+      "developer_message": "[Opcional] ¡Gracias por usar mi aplicación!",
+      "developer_name": "[Importante] Nombre del desarrollador",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_es.png",
+      "changelog": "[Opcional] Mejoras generales."
+    },
+    "pt": {
+      "app_name": "[Importante] Nome do aplicativo",
+      "short_description": "[Importante] Uma descrição curta e atraente.",
+      "detailed_description": "[Opcional e Recomendado] Bem-vindo ao meu aplicativo! Desenvolvido por Shizuku.",
+      "developer_message": "[Opcional] Obrigado por usar meu aplicativo!",
+      "developer_name": "[Importante] Nome do desenvolvedor",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_pt.png",
+      "changelog": "[Opcional] Melhorias gerais."
+    },
+    "ru": {
+      "app_name": "[Важно] Название приложения",
+      "short_description": "[Важно] Краткое и привлекательное описание.",
+      "detailed_description": "[Необязательно, но рекомендуется] Добро пожаловать в мое приложение! Работает через Shizuku.",
+      "developer_message": "[Необязательно] Спасибо за использование моего приложения!",
+      "developer_name": "[Важно] Имя разработчика",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_ru.png",
+      "changelog": "[Необязательно] Общие улучшения."
+    },
+    "hi": {
+      "app_name": "[महत्वपूर्ण] ऐप का नाम",
+      "short_description": "[महत्वपूर्ण] एक संक्षिप्त और आकर्षक विवरण।",
+      "detailed_description": "[वैकल्पिक और अनुशंसित] मेरे ऐप में आपका स्वागत है! Shizuku द्वारा संचालित।",
+      "developer_message": "[वैकल्पिक] मेरे ऐप का उपयोग करने के लिए धन्यवाद!",
+      "developer_name": "[महत्वपूर्ण] डेवलपर का नाम",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_hi.png",
+      "changelog": "[वैकल्पिक] सामान्य सुधार।"
+    },
+    "zh": {
+      "app_name": "[重要] 应用名称",
+      "short_description": "[重要] 简短而吸引人的描述。",
+      "detailed_description": "[可选且推荐] 欢迎使用我的应用！由 Shizuku 提供支持。",
+      "developer_message": "[可选] 感谢您使用我的应用！",
+      "developer_name": "[重要] 开发者名称",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_zh.png",
+      "changelog": "[可选] 常规改进。"
+    },
+    "ja": {
+      "app_name": "[重要] アプリ名",
+      "short_description": "[重要] 短くて魅力的な説明。",
+      "detailed_description": "[オプション・推奨] 私のアプリへようこそ！ Shizukuを搭載。",
+      "developer_message": "[オプション] アプリをご利用いただきありがとうございます！",
+      "developer_name": "[重要] 開発者名",
+      "banner_url": "https://raw.githubusercontent.com/username/repo/main/optional_banner_ja.png",
+      "changelog": "[オプション] 一般的な改善。"
+    }
+  }
+}
