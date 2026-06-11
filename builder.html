@@ -1,28 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="htmlRoot" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shizu Store JSON Builder</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title data-i18n="b_page_title">Shizu Store JSON Builder</title>
+  <!-- دعم خطوط الانجليزية والعربية -->
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
   <style>
     :root {
       --bg: #0d0f14; --bg2: #12151c; --bg3: #1a1e28; --border: #252a38; --border2: #2f3547;
       --text: #e8eaf0; --text2: #9ba3b8; --accent: #48a999; --accent-hover: #3c9183;
-      --danger: #f06292; --radius: 10px; --radius-sm: 6px;
+      --danger: #f06292; --radius: 8px; --radius-sm: 8px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 40px 20px; line-height: 1.6; }
+    
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; padding: 40px 20px; line-height: 1.6; overflow-x: hidden; }
+    
     .container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start; }
     @media (max-width: 900px) { .container { grid-template-columns: 1fr; } }
     
     .header { max-width: 1200px; margin: 0 auto 30px; }
+    
+    /* ─── HEADER TOP (التوازي الدقيق وإصلاح التمدد) ─── */
+    .header-top { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 20px; 
+      gap: 15px; 
+      flex-wrap: wrap; /* صمام الأمان للشاشات الصغيرة */
+    }
+    
+    .nav-link { 
+      display: inline-flex; 
+      align-items: center;
+      color: var(--accent); 
+      text-decoration: none; 
+      font-weight: 500; 
+      font-size: 14px; 
+      white-space: nowrap; 
+      flex-shrink: 0; 
+    }
+    .nav-link:hover { text-decoration: underline; }
+
+    .lang-select {
+      background: rgba(72, 169, 153, 0.1); 
+      color: var(--accent); 
+      border: 1px solid var(--accent);
+      font-family: inherit; 
+      font-size: 13px; 
+      font-weight: 600; 
+      padding: 5px 16px;
+      border-radius: 100px; 
+      cursor: pointer; 
+      transition: all 0.2s; 
+      outline: none;
+      white-space: nowrap; 
+      flex-shrink: 0; 
+      margin: 0 !important; 
+      width: auto !important; /* يمنع القائمة من التمدد بشكل عشوائي */
+    }
+    .lang-select:hover, .lang-select:focus { background: rgba(72, 169, 153, 0.2); }
+    .lang-select option { background: var(--bg2); color: var(--text); font-weight: 500; }
+
     .header h1 { font-size: 28px; margin-bottom: 8px; color: var(--text); }
     .header p { color: var(--text2); font-size: 15px; }
-    .nav-link { display: inline-block; margin-bottom: 15px; color: var(--accent); text-decoration: none; font-weight: 500; font-size: 14px; }
-    .nav-link:hover { text-decoration: underline; }
 
     /* Form Styles */
     .form-panel { display: flex; flex-direction: column; gap: 15px; }
@@ -39,6 +83,7 @@
 
     label { font-size: 13px; color: var(--text2); font-weight: 500; margin-bottom: 6px; display: block; }
     .required::after { content: ' *'; color: var(--danger); }
+    
     input[type="text"], input[type="url"], input[type="email"], input[type="number"], select, textarea {
       width: 100%; background: var(--bg); border: 1px solid var(--border2); color: var(--text); padding: 10px 12px; border-radius: var(--radius-sm); font-family: inherit; font-size: 14px; transition: border 0.2s;
     }
@@ -56,14 +101,42 @@
     pre { background: #0a0c10; padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 13.5px; color: #abb2bf; overflow-x: auto; white-space: pre-wrap; height: 600px; overflow-y: auto; }
     .btn { display: inline-flex; width: 100%; justify-content: center; background: var(--accent); color: white; border: none; padding: 14px; border-radius: var(--radius); font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 15px; transition: 0.2s; }
     .btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    /* ─── RTL SUPPORT (Arabic) ─── */
+    [dir="rtl"] body { text-align: right; }
+    [dir="rtl"] body, [dir="rtl"] input, [dir="rtl"] textarea, [dir="rtl"] select, [dir="rtl"] .btn { font-family: 'Tajawal', system-ui, sans-serif; }
+    [dir="rtl"] h1, [dir="rtl"] .card-header, [dir="rtl"] summary { font-family: 'Tajawal', system-ui, sans-serif; }
+    
+    /* حماية الحقول التقنية لمنع تشوه النصوص والروابط */
+    [dir="rtl"] input[type="url"], 
+    [dir="rtl"] input[type="email"], 
+    [dir="rtl"] #package_name, 
+    [dir="rtl"] #store_issue_number, 
+    [dir="rtl"] #screenshots,
+    [dir="rtl"] pre {
+      direction: ltr; text-align: left;
+    }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <a href="index.html" class="nav-link">← Back to Documentation</a>
-    <h1>🛠️ Shizu Store JSON Builder</h1>
-    <p>Smart builder for generating error-free `shizu_store.json` manifests. Fill the required fields, and expand optional sections as needed.</p>
+    <div class="header-top">
+      <a href="index.html" class="nav-link" data-i18n="b_back_link">← Back to Documentation</a>
+      <select id="langSw" class="lang-select">
+        <option value="en">English</option>
+        <option value="ar">العربية</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="pt">Português</option>
+        <option value="ru">Русский</option>
+        <option value="zh">中文</option>
+        <option value="ja">日本語</option>
+        <option value="hi">हिन्दी</option>
+      </select>
+    </div>
+    <h1 data-i18n="b_header_title">Shizu Store JSON Builder</h1>
+    <p data-i18n="b_header_sub">Smart builder for generating error-free <code>shizu_store.json</code> manifests. Fill the required fields, and expand optional sections as needed.</p>
   </div>
 
   <div class="container">
@@ -71,58 +144,58 @@
     <div class="form-panel" id="builderForm">
       
       <div class="card">
-        <div class="card-header">1. Required Information</div>
+        <div class="card-header" data-i18n="b_card1_title">1. Required Information</div>
         <div class="card-body">
-          <div><label class="required">App Name</label><input type="text" id="app_name" placeholder="e.g. ShizuCoreFetch" required></div>
-          <div><label class="required">Package Name</label><input type="text" id="package_name" placeholder="e.g. xyz.siwane.myapp" required></div>
-          <div><label class="required">Short Description</label><input type="text" id="short_description" placeholder="One line description..." required></div>
-          <div><label class="required">Icon URL (Absolute HTTPS)</label><input type="url" id="icon_url" placeholder="https://raw.githubusercontent.com/.../icon.png" required></div>
+          <div><label class="required" data-i18n="b_lbl_app_name">App Name</label><input type="text" id="app_name" placeholder="e.g. ShizuCoreFetch" required></div>
+          <div><label class="required" data-i18n="b_lbl_pkg_name">Package Name</label><input type="text" id="package_name" placeholder="e.g. xyz.siwane.myapp" required></div>
+          <div><label class="required" data-i18n="b_lbl_short_desc">Short Description</label><input type="text" id="short_description" placeholder="One line description..." required></div>
+          <div><label class="required" data-i18n="b_lbl_icon_url">Icon URL (Absolute HTTPS)</label><input type="url" id="icon_url" placeholder="https://raw.githubusercontent.com/.../icon.png" required></div>
         </div>
       </div>
 
       <details class="card">
-        <summary>2. Extended App Details</summary>
+        <summary data-i18n="b_card2_title">2. Extended App Details</summary>
         <div class="card-body">
-          <div><label>Detailed Description</label><textarea id="detailed_description" placeholder="Supports \n and **bold**..."></textarea></div>
-          <div><label>Developer Message</label><textarea id="developer_message" placeholder="A personal message to your users..."></textarea></div>
-          <div><label>App Banner URL</label><input type="url" id="banner_url" placeholder="https://..."></div>
-          <div><label>App Website</label><input type="url" id="app_website" placeholder="https://..."></div>
-          <div><label>Repository URL</label><input type="url" id="repo_url" placeholder="https://github.com/.../..."></div>
-          <div><label>GitHub Issue Number (For Comments)</label><input type="number" id="store_issue_number" placeholder="e.g. 1"></div>
+          <div><label data-i18n="b_lbl_det_desc">Detailed Description</label><textarea id="detailed_description" placeholder="Supports \n and **bold**..."></textarea></div>
+          <div><label data-i18n="b_lbl_dev_msg">Developer Message</label><textarea id="developer_message" placeholder="A personal message to your users..."></textarea></div>
+          <div><label data-i18n="b_lbl_banner_url">App Banner URL</label><input type="url" id="banner_url" placeholder="https://..."></textarea></div>
+          <div><label data-i18n="b_lbl_app_web">App Website</label><input type="url" id="app_website" placeholder="https://..."></div>
+          <div><label data-i18n="b_lbl_repo_url">Repository URL</label><input type="url" id="repo_url" placeholder="https://github.com/.../..."></div>
+          <div><label data-i18n="b_lbl_issue_num">GitHub Issue Number (For Comments)</label><input type="number" id="store_issue_number" placeholder="e.g. 1"></div>
         </div>
       </details>
 
       <details class="card">
-        <summary>3. Screenshots</summary>
+        <summary data-i18n="b_card3_title">3. Screenshots</summary>
         <div class="card-body">
           <div>
-            <label>Screenshot URLs</label>
+            <label data-i18n="b_lbl_scr_urls">Screenshot URLs</label>
             <textarea id="screenshots" rows="4" placeholder="https://.../screen1.png&#10;https://.../screen2.png"></textarea>
-            <div class="help-text">Enter one absolute HTTPS URL per line.</div>
+            <div class="help-text" data-i18n="b_help_scr">Enter one absolute HTTPS URL per line.</div>
           </div>
         </div>
       </details>
 
       <details class="card">
-        <summary>4. Ads & Monetization</summary>
+        <summary data-i18n="b_card4_title">4. Ads & Monetization</summary>
         <div class="card-body">
           <label class="toggle-row">
             <input type="checkbox" id="ad_toggle">
-            <strong>Enable Custom Ads</strong>
+            <strong data-i18n="b_lbl_en_ads">Enable Custom Ads</strong>
           </label>
-          <div class="help-text" style="margin-bottom: 10px;">Promote your own links. No gambling, adult, or illegal content.</div>
+          <div class="help-text" style="margin-bottom: 10px;" data-i18n="b_help_ads">Promote your own links. No gambling, adult, or illegal content.</div>
           
           <div id="ads_fields" class="hidden">
             <div style="padding: 15px; border: 1px dashed var(--border2); border-radius: var(--radius-sm); margin-bottom: 10px;">
-              <label>Top Ad Banner URL</label>
+              <label data-i18n="b_lbl_ad_top_img">Top Ad Banner URL</label>
               <input type="url" id="ad_top_img" placeholder="https://...">
-              <label>Top Ad Target Link</label>
+              <label data-i18n="b_lbl_ad_top_link">Top Ad Target Link</label>
               <input type="url" id="ad_top_link" placeholder="https://...">
             </div>
             <div style="padding: 15px; border: 1px dashed var(--border2); border-radius: var(--radius-sm);">
-              <label>Bottom Ad Banner URL</label>
+              <label data-i18n="b_lbl_ad_bot_img">Bottom Ad Banner URL</label>
               <input type="url" id="ad_bot_img" placeholder="https://...">
-              <label>Bottom Ad Target Link</label>
+              <label data-i18n="b_lbl_ad_bot_link">Bottom Ad Target Link</label>
               <input type="url" id="ad_bot_link" placeholder="https://...">
             </div>
           </div>
@@ -130,16 +203,16 @@
       </details>
 
       <details class="card">
-        <summary>5. Developer Portfolio</summary>
+        <summary data-i18n="b_card5_title">5. Developer Portfolio</summary>
         <div class="card-body">
-          <div><label>Developer Name</label><input type="text" id="dev_name" placeholder="Jamal El Hizazi"></div>
-          <div><label>Account / GitHub URL</label><input type="url" id="dev_account" placeholder="https://github.com/elhizazi1"></div>
-          <div><label>Developer Banner URL</label><input type="url" id="dev_banner" placeholder="https://..."></div>
-          <div><label>Email</label><input type="email" id="dev_email" placeholder="jamal@elhizazi.me"></div>
-          <div><label>Website</label><input type="url" id="dev_website" placeholder="https://siwane.xyz"></div>
-          <div><label>Portfolio</label><input type="url" id="dev_portfolio" placeholder="https://jamal.elhizazi.me"></div>
+          <div><label data-i18n="b_lbl_dev_name">Developer Name</label><input type="text" id="dev_name" placeholder="Jamal El Hizazi"></div>
+          <div><label data-i18n="b_lbl_dev_acc">Account / GitHub URL</label><input type="url" id="dev_account" placeholder="https://github.com/elhizazi1"></div>
+          <div><label data-i18n="b_lbl_dev_banner">Developer Banner URL</label><input type="url" id="dev_banner" placeholder="https://..."></div>
+          <div><label data-i18n="b_lbl_dev_email">Email</label><input type="email" id="dev_email" placeholder="jamal@elhizazi.me"></div>
+          <div><label data-i18n="b_lbl_dev_web">Website</label><input type="url" id="dev_website" placeholder="https://siwane.xyz"></div>
+          <div><label data-i18n="b_lbl_dev_port">Portfolio</label><input type="url" id="dev_portfolio" placeholder="https://jamal.elhizazi.me"></div>
           
-          <h4 style="margin-top: 10px; font-size: 14px; color: var(--text);">Social Links</h4>
+          <h4 style="margin-top: 10px; font-size: 14px; color: var(--text);" data-i18n="b_sub_social">Social Links</h4>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
             <div><label>GitHub</label><input type="url" id="soc_github"></div>
             <div><label>X (Twitter)</label><input type="url" id="soc_x"></div>
@@ -152,11 +225,11 @@
       </details>
 
       <details class="card">
-        <summary>6. Localization (Translations)</summary>
+        <summary data-i18n="b_card6_title">6. Localization (Translations)</summary>
         <div class="card-body">
-          <div class="help-text" style="margin-bottom: 10px;">Translate your app details. Data is saved automatically when switching languages.</div>
+          <div class="help-text" style="margin-bottom: 10px;" data-i18n="b_help_loc">Translate your app details. Data is saved automatically when switching languages below.</div>
           
-          <label>Select Language to Edit</label>
+          <label data-i18n="b_lbl_sel_lang">Select Language to Edit</label>
           <select id="loc_selector">
             <option value="ar">Arabic (ar) - العربية</option>
             <option value="fr">French (fr) - Français</option>
@@ -169,13 +242,13 @@
           </select>
 
           <div style="padding: 15px; background: var(--bg3); border-radius: var(--radius-sm); margin-top: 10px; border: 1px solid var(--border2);">
-            <div><label>Translated App Name</label><input type="text" id="loc_app_name"></div>
-            <div><label>Translated Short Description</label><input type="text" id="loc_short_description"></div>
-            <div><label>Translated Detailed Description</label><textarea id="loc_detailed_description"></textarea></div>
-            <div><label>Translated Developer Message</label><textarea id="loc_developer_message"></textarea></div>
-            <div><label>Translated Developer Name</label><input type="text" id="loc_developer_name"></div>
-            <div><label>Localized Banner URL</label><input type="url" id="loc_banner_url"></div>
-            <div><label>Changelog</label><textarea id="loc_changelog"></textarea></div>
+            <div><label data-i18n="b_lbl_loc_app">Translated App Name</label><input type="text" id="loc_app_name"></div>
+            <div><label data-i18n="b_lbl_loc_short">Translated Short Description</label><input type="text" id="loc_short_description"></div>
+            <div><label data-i18n="b_lbl_loc_det">Translated Detailed Description</label><textarea id="loc_detailed_description"></textarea></div>
+            <div><label data-i18n="b_lbl_loc_msg">Translated Developer Message</label><textarea id="loc_developer_message"></textarea></div>
+            <div><label data-i18n="b_lbl_loc_dev">Translated Developer Name</label><input type="text" id="loc_developer_name"></div>
+            <div><label data-i18n="b_lbl_loc_ban">Localized Banner URL</label><input type="url" id="loc_banner_url"></div>
+            <div><label data-i18n="b_lbl_loc_change">Changelog</label><textarea id="loc_changelog"></textarea></div>
           </div>
         </div>
       </details>
@@ -184,15 +257,19 @@
 
     <div class="output-panel">
       <pre id="jsonOutput">{}</pre>
-      <button class="btn" onclick="downloadJSON()">📥 Download shizu_store.json</button>
+      <button class="btn" onclick="downloadJSON()" data-i18n="b_btn_download">Download shizu_store.json</button>
     </div>
 
   </div>
 
+  <!-- السكربت المركزي للتبديل بين اللغات (واجهة المستخدم) -->
+  <script src="app.js"></script>
+
+  <!-- سكربت المحرر الخاص بتوليد الـ JSON (تخزين بيانات المحليات) -->
   <script>
     // Global Storage for Locales
     const localesData = { ar:{}, fr:{}, es:{}, pt:{}, ru:{}, hi:{}, zh:{}, ja:{} };
-    let currentLang = 'ar';
+    let currentBuilderLang = 'ar';
 
     // UI Elements
     const formPanel = document.getElementById('builderForm');
@@ -211,10 +288,10 @@
       generateJSON();
     });
 
-    // Handle Locale Switching
+    // Handle Locale Switching (For the JSON object, NOT the UI)
     locSelector.addEventListener('change', (e) => {
       saveCurrentLocale();
-      currentLang = e.target.value;
+      currentBuilderLang = e.target.value;
       loadCurrentLocale();
     });
 
@@ -222,21 +299,21 @@
       locFields.forEach(id => {
         const val = document.getElementById(id).value.trim();
         const key = id.replace('loc_', '');
-        if (val) localesData[currentLang][key] = val;
-        else delete localesData[currentLang][key]; // remove if emptied
+        if (val) localesData[currentBuilderLang][key] = val;
+        else delete localesData[currentBuilderLang][key];
       });
     }
 
     function loadCurrentLocale() {
       locFields.forEach(id => {
         const key = id.replace('loc_', '');
-        document.getElementById(id).value = localesData[currentLang][key] || '';
+        document.getElementById(id).value = localesData[currentBuilderLang][key] || '';
       });
     }
 
     // Main JSON Generator
     function generateJSON() {
-      saveCurrentLocale(); // ensure latest keystrokes in locale are saved
+      saveCurrentLocale(); 
       
       const val = (id) => document.getElementById(id).value.trim();
       const jsonObj = {};
@@ -319,7 +396,7 @@
 
     // Trigger update on any input in the form
     formPanel.addEventListener('input', generateJSON);
-    generateJSON(); // initial render
+    generateJSON();
 
     // Download Logic
     function downloadJSON() {
