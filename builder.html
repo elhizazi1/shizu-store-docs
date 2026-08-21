@@ -156,9 +156,10 @@
       <details class="card">
         <summary data-i18n="b_card2_title">2. Extended App Details</summary>
         <div class="card-body">
+          <div><label data-i18n="b_lbl_category">App Category</label><input type="text" id="category" placeholder="e.g. System Tools"></div>
           <div><label data-i18n="b_lbl_det_desc">Detailed Description</label><textarea id="detailed_description" placeholder="Supports \n and **bold**..."></textarea></div>
           <div><label data-i18n="b_lbl_dev_msg">Developer Message</label><textarea id="developer_message" placeholder="A personal message to your users..."></textarea></div>
-          <div><label data-i18n="b_lbl_banner_url">App Banner URL</label><input type="url" id="banner_url" placeholder="https://..."></textarea></div>
+          <div><label data-i18n="b_lbl_banner_url">App Banner URL</label><input type="url" id="banner_url" placeholder="https://..."></div>
           <div><label data-i18n="b_lbl_app_web">App Website</label><input type="url" id="app_website" placeholder="https://..."></div>
           <div><label data-i18n="b_lbl_repo_url">Repository URL</label><input type="url" id="repo_url" placeholder="https://github.com/.../..."></div>
           <div><label data-i18n="b_lbl_issue_num">GitHub Issue Number (For Comments)</label><input type="number" id="store_issue_number" placeholder="e.g. 1"></div>
@@ -166,7 +167,25 @@
       </details>
 
       <details class="card">
-        <summary data-i18n="b_card3_title">3. Screenshots</summary>
+        <summary data-i18n="b_card_tech_title">3. Technical & Versioning</summary>
+        <div class="card-body">
+          <div><label data-i18n="b_lbl_version_name">Version Name</label><input type="text" id="version_name" placeholder="e.g. 1.4.2"></div>
+          <div><label data-i18n="b_lbl_version_code">Version Code</label><input type="number" id="version_code" placeholder="e.g. 14"></div>
+          <div><label data-i18n="b_lbl_min_sdk">Minimum SDK</label><input type="number" id="min_sdk" placeholder="e.g. 24"></div>
+          <div><label data-i18n="b_lbl_target_sdk">Target SDK</label><input type="number" id="target_sdk" placeholder="e.g. 37"></div>
+          <div><label data-i18n="b_lbl_min_shizuku">Minimum Shizuku Version</label><input type="number" id="min_shizuku_version" placeholder="e.g. 13"></div>
+          <div><label data-i18n="b_lbl_license">License</label><input type="text" id="license" placeholder="e.g. GPL-3.0"></div>
+          <div><label data-i18n="b_lbl_tags">Tags</label><input type="text" id="tags" placeholder="shizuku, apk, tools"><div class="help-text" data-i18n="b_help_tags">Comma-separated keywords, e.g. shizuku, apk, tools</div></div>
+          <div><label data-i18n="b_lbl_download_url">APK Download URL</label><input type="url" id="download_url" placeholder="https://.../app-release.apk"></div>
+          <div><label data-i18n="b_lbl_donate_url">Donation URL</label><input type="url" id="donate_url" placeholder="https://paypal.me/..."></div>
+          <div><label data-i18n="b_lbl_changelog">Changelog (Default / English)</label><textarea id="changelog" placeholder="### 🚀 What's new..."></textarea></div>
+          <label class="toggle-row"><input type="checkbox" id="requires_shizuku" checked><strong data-i18n="b_lbl_requires_shizuku">Requires Shizuku</strong></label>
+          <label class="toggle-row"><input type="checkbox" id="open_source"><strong data-i18n="b_lbl_open_source">Open Source</strong></label>
+        </div>
+      </details>
+
+      <details class="card">
+        <summary data-i18n="b_card3_title">4. Screenshots</summary>
         <div class="card-body">
           <div>
             <label data-i18n="b_lbl_scr_urls">Screenshot URLs</label>
@@ -177,7 +196,7 @@
       </details>
 
       <details class="card">
-        <summary data-i18n="b_card4_title">4. Ads & Monetization</summary>
+        <summary data-i18n="b_card4_title">5. Ads & Monetization</summary>
         <div class="card-body">
           <label class="toggle-row">
             <input type="checkbox" id="ad_toggle">
@@ -203,7 +222,7 @@
       </details>
 
       <details class="card">
-        <summary data-i18n="b_card5_title">5. Developer Portfolio</summary>
+        <summary data-i18n="b_card5_title">6. Developer Portfolio</summary>
         <div class="card-body">
           <div><label data-i18n="b_lbl_dev_name">Developer Name</label><input type="text" id="dev_name" placeholder="Jamal El Hizazi"></div>
           <div><label data-i18n="b_lbl_dev_acc">Account / GitHub URL</label><input type="url" id="dev_account" placeholder="https://github.com/elhizazi1"></div>
@@ -211,6 +230,7 @@
           <div><label data-i18n="b_lbl_dev_email">Email</label><input type="email" id="dev_email" placeholder="jamal@elhizazi.me"></div>
           <div><label data-i18n="b_lbl_dev_web">Website</label><input type="url" id="dev_website" placeholder="https://siwane.xyz"></div>
           <div><label data-i18n="b_lbl_dev_port">Portfolio</label><input type="url" id="dev_portfolio" placeholder="https://jamal.elhizazi.me"></div>
+          <div><label data-i18n="b_lbl_dev_donate">Developer Donation URL</label><input type="url" id="dev_donate" placeholder="https://paypal.me/..."></div>
           
           <h4 style="margin-top: 10px; font-size: 14px; color: var(--text);" data-i18n="b_sub_social">Social Links</h4>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
@@ -225,7 +245,7 @@
       </details>
 
       <details class="card">
-        <summary data-i18n="b_card6_title">6. Localization (Translations)</summary>
+        <summary data-i18n="b_card6_title">7. Localization (Translations)</summary>
         <div class="card-body">
           <div class="help-text" style="margin-bottom: 10px;" data-i18n="b_help_loc">Translate your app details. Data is saved automatically when switching languages below.</div>
           
@@ -239,10 +259,13 @@
             <option value="hi">Hindi (hi) - हिन्दी</option>
             <option value="zh">Chinese (zh) - 中文</option>
             <option value="ja">Japanese (ja) - 日本語</option>
+            <option value="tr">Turkish (tr) - Türkçe</option>
+            <option value="cs">Czech (cs) - Čeština</option>
           </select>
 
           <div style="padding: 15px; background: var(--bg3); border-radius: var(--radius-sm); margin-top: 10px; border: 1px solid var(--border2);">
             <div><label data-i18n="b_lbl_loc_app">Translated App Name</label><input type="text" id="loc_app_name"></div>
+            <div><label data-i18n="b_lbl_loc_cat">Translated Category</label><input type="text" id="loc_category"></div>
             <div><label data-i18n="b_lbl_loc_short">Translated Short Description</label><input type="text" id="loc_short_description"></div>
             <div><label data-i18n="b_lbl_loc_det">Translated Detailed Description</label><textarea id="loc_detailed_description"></textarea></div>
             <div><label data-i18n="b_lbl_loc_msg">Translated Developer Message</label><textarea id="loc_developer_message"></textarea></div>
@@ -267,8 +290,8 @@
 
   <!-- سكربت المحرر الخاص بتوليد الـ JSON (تخزين بيانات المحليات) -->
   <script>
-    // Global Storage for Locales
-    const localesData = { ar:{}, fr:{}, es:{}, pt:{}, ru:{}, hi:{}, zh:{}, ja:{} };
+    // Global Storage for Locales (11 supported languages, excluding root 'en')
+    const localesData = { ar:{}, fr:{}, es:{}, pt:{}, ru:{}, hi:{}, zh:{}, ja:{}, tr:{}, cs:{} };
     let currentBuilderLang = 'ar';
 
     // UI Elements
@@ -279,7 +302,7 @@
     const locSelector = document.getElementById('loc_selector');
 
     // Locale Input IDs
-    const locFields = ['loc_app_name', 'loc_short_description', 'loc_detailed_description', 'loc_developer_message', 'loc_developer_name', 'loc_banner_url', 'loc_changelog'];
+    const locFields = ['loc_app_name', 'loc_category', 'loc_short_description', 'loc_detailed_description', 'loc_developer_message', 'loc_developer_name', 'loc_banner_url', 'loc_changelog'];
 
     // Toggle Ads Section
     adToggle.addEventListener('change', (e) => {
@@ -318,6 +341,9 @@
       const val = (id) => document.getElementById(id).value.trim();
       const jsonObj = {};
 
+      // 0. Schema version (always emitted)
+      jsonObj.schema_version = 1;
+
       // 1. Required
       if (val('app_name')) jsonObj.app_name = val('app_name');
       if (val('package_name')) jsonObj.package_name = val('package_name');
@@ -325,6 +351,7 @@
       if (val('icon_url')) jsonObj.icon_url = val('icon_url');
 
       // 2. Extended Metadata
+      if (val('category')) jsonObj.category = val('category');
       if (val('detailed_description')) jsonObj.detailed_description = val('detailed_description');
       if (val('developer_message')) jsonObj.developer_message = val('developer_message');
       if (val('banner_url')) jsonObj.banner_url = val('banner_url');
@@ -332,16 +359,33 @@
       if (val('repo_url')) jsonObj.repo_url = val('repo_url');
       if (val('store_issue_number')) jsonObj.store_issue_number = parseInt(val('store_issue_number'));
 
-      // 3. Screenshots
+      // 3. Technical & Versioning
+      if (val('version_name')) jsonObj.version_name = val('version_name');
+      if (val('version_code')) jsonObj.version_code = parseInt(val('version_code'));
+      if (val('min_sdk')) jsonObj.min_sdk = parseInt(val('min_sdk'));
+      if (val('target_sdk')) jsonObj.target_sdk = parseInt(val('target_sdk'));
+      if (val('min_shizuku_version')) jsonObj.min_shizuku_version = parseInt(val('min_shizuku_version'));
+      if (val('license')) jsonObj.license = val('license');
+      if (val('tags')) {
+        const tagsArr = val('tags').split(',').map(t => t.trim()).filter(t => t !== '');
+        if (tagsArr.length > 0) jsonObj.tags = tagsArr;
+      }
+      if (val('download_url')) jsonObj.download_url = val('download_url');
+      if (val('donate_url')) jsonObj.donate_url = val('donate_url');
+      if (val('changelog')) jsonObj.changelog = val('changelog');
+      jsonObj.requires_shizuku = document.getElementById('requires_shizuku').checked;
+      jsonObj.open_source = document.getElementById('open_source').checked;
+
+      // 4. Screenshots
       const screenText = val('screenshots');
       if (screenText) {
         const lines = screenText.split('\n').map(s => s.trim()).filter(s => s !== '');
         if (lines.length > 0) jsonObj.screenshots = lines;
       }
 
-      // 4. Ads
+      // 5. Ads
       if (adToggle.checked) {
-        jsonObj.ad = true;
+        jsonObj.has_ads = true;
         const adsArray = [];
         if (val('ad_top_img') && val('ad_top_link')) {
           adsArray.push({ position: "top", image_url: val('ad_top_img'), target_url: val('ad_top_link') });
@@ -352,8 +396,8 @@
         if (adsArray.length > 0) jsonObj.ads = adsArray;
       }
 
-      // 5. Developer Portfolio
-      const devFields = ['dev_name', 'dev_account', 'dev_banner', 'dev_email', 'dev_website', 'dev_portfolio'];
+      // 6. Developer Portfolio
+      const devFields = ['dev_name', 'dev_account', 'dev_banner', 'dev_email', 'dev_website', 'dev_portfolio', 'dev_donate'];
       const socFields = ['soc_github', 'soc_x', 'soc_telegram', 'soc_youtube', 'soc_facebook', 'soc_instagram'];
       
       let hasDevInfo = devFields.some(id => val(id) !== '');
@@ -367,6 +411,7 @@
         if (val('dev_email')) jsonObj.developer.email = val('dev_email');
         if (val('dev_website')) jsonObj.developer.website = val('dev_website');
         if (val('dev_portfolio')) jsonObj.developer.portfolio = val('dev_portfolio');
+        if (val('dev_donate')) jsonObj.developer.donate_url = val('dev_donate');
 
         if (hasSocials) {
           jsonObj.developer.socials = {};
@@ -377,7 +422,7 @@
         }
       }
 
-      // 6. Locales
+      // 7. Locales
       const finalLocales = {};
       let hasLocales = false;
       for (const lang in localesData) {

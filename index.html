@@ -170,14 +170,28 @@ my-shizuku-app/
           </tr>
         </thead>
         <tbody>
+          <tr><td><code>schema_version</code></td><td><code>integer</code></td><td data-i18n="opt_desc_schema_version">Schema version. Must be 1 for the current specification.</td></tr>
+          <tr><td><code>category</code></td><td><code>string</code></td><td data-i18n="opt_desc_cat">App category for store browsing (e.g. 'System Tools').</td></tr>
           <tr><td><code>detailed_description</code></td><td><code>string</code></td><td data-i18n="opt_desc_det">Long-form description. Supports <code>\n</code> and Markdown <code>**bold**</code>.</td></tr>
           <tr><td><code>developer_message</code></td><td><code>string</code></td><td data-i18n="opt_desc_msg">A personal message to your users displayed in a dedicated card.</td></tr>
+          <tr><td><code>version_name</code></td><td><code>string</code></td><td data-i18n="opt_desc_ver_name">Human-readable version string (e.g. '1.4.2').</td></tr>
+          <tr><td><code>version_code</code></td><td><code>integer</code></td><td data-i18n="opt_desc_ver_code">Integer version code used internally by Android.</td></tr>
+          <tr><td><code>min_sdk</code></td><td><code>integer</code></td><td data-i18n="opt_desc_min_sdk">Minimum Android SDK version required to install the app.</td></tr>
+          <tr><td><code>target_sdk</code></td><td><code>integer</code></td><td data-i18n="opt_desc_target_sdk">Target Android SDK version the app was built against.</td></tr>
+          <tr><td><code>min_shizuku_version</code></td><td><code>integer</code></td><td data-i18n="opt_desc_min_shizuku">Minimum Shizuku version code required to run the app.</td></tr>
+          <tr><td><code>license</code></td><td><code>string</code></td><td data-i18n="opt_desc_license">Software license identifier (e.g. 'GPL-3.0', 'MIT').</td></tr>
+          <tr><td><code>requires_shizuku</code></td><td><code>boolean</code></td><td data-i18n="opt_desc_req_shizuku">Whether the app requires Shizuku to function. Defaults to true.</td></tr>
+          <tr><td><code>open_source</code></td><td><code>boolean</code></td><td data-i18n="opt_desc_open_source">Whether the app's source code is publicly available.</td></tr>
+          <tr><td><code>tags</code></td><td><code>array</code></td><td data-i18n="opt_desc_tags">Array of keyword tags used for search and discovery. Max 15.</td></tr>
+          <tr><td><code>changelog</code></td><td><code>string</code></td><td data-i18n="opt_desc_changelog">Changelog for the current version. Supports <code>\n</code> and Markdown-style formatting.</td></tr>
           <tr><td><code>banner_url</code></td><td><code>string</code></td><td data-i18n="opt_desc_ban">Absolute URL to a banner image (16:9 recommended).</td></tr>
           <tr><td><code>screenshots</code></td><td><code>array</code></td><td data-i18n="opt_desc_scr">Array of absolute URLs to screenshot images.</td></tr>
           <tr><td><code>repo_url</code></td><td><code>string</code></td><td data-i18n="opt_desc_repo">Direct link to the GitHub repository.</td></tr>
           <tr><td><code>app_website</code></td><td><code>string</code></td><td data-i18n="opt_desc_web">Official website for your app.</td></tr>
+          <tr><td><code>download_url</code></td><td><code>string</code> (URL)</td><td data-i18n="opt_desc_download">Absolute URL to the APK file. Must end in .apk.</td></tr>
+          <tr><td><code>donate_url</code></td><td><code>string</code></td><td data-i18n="opt_desc_donate">Absolute URL to a donation page for the app.</td></tr>
           <tr><td><code>store_issue_number</code></td><td><code>integer</code></td><td data-i18n="opt_desc_iss">The GitHub Issue number used to fetch and display user comments natively.</td></tr>
-          <tr><td><code>ad</code></td><td><code>boolean</code></td><td data-i18n="opt_desc_ad">Set to <code>true</code> to enable custom ad banners in your app details.</td></tr>
+          <tr><td><code>has_ads</code></td><td><code>boolean</code></td><td data-i18n="opt_desc_has_ads">Set to <code>true</code> to enable custom ad banners in your app details. Replaces the deprecated <code>ad</code> field.</td></tr>
           <tr><td><code>ads</code></td><td><code>array</code></td><td data-i18n="opt_desc_ads">Array containing your custom ad configurations (See Monetization section).</td></tr>
           <tr><td><code>developer</code></td><td><code>object</code></td><td data-i18n="opt_desc_dev">Rich developer portfolio info. See below.</td></tr>
           <tr><td><code>locales</code></td><td><code>object</code></td><td data-i18n="opt_desc_loc">Translated strings per language code. See Languages section.</td></tr>
@@ -196,6 +210,7 @@ my-shizuku-app/
   <span class="k">"email"</span><span class="p">:</span>       <span class="s">"jamal@elhizazi.me"</span><span class="p">,</span>
   <span class="k">"website"</span><span class="p">:</span>     <span class="s">"https://siwane.xyz"</span><span class="p">,</span>
   <span class="k">"portfolio"</span><span class="p">:</span>   <span class="s">"https://jamal.elhizazi.me"</span><span class="p">,</span>
+  <span class="k">"donate_url"</span><span class="p">:</span> <span class="s">"https://paypal.me/yourname"</span><span class="p">,</span>
   <span class="k">"socials"</span><span class="p">: {</span>
     <span class="k">"facebook"</span><span class="p">:</span>  <span class="s">"https://fb.com/elhizazi2"</span><span class="p">,</span>
     <span class="k">"instagram"</span><span class="p">:</span> <span class="s">"https://instagram.com/elhizazi1"</span><span class="p">,</span>
@@ -212,12 +227,12 @@ my-shizuku-app/
     <h2 data-i18n="ads_title">Ads & Monetization</h2>
     <p data-i18n="ads_p1">
       Shizu CoreFetch empowers developers by allowing them to display their own custom ads directly inside their app's details page. 
-      You keep 100% of the traffic. Set <code>"ad": true</code> and configure the <code>ads</code> array.
+      You keep 100% of the traffic. Set <code>'has_ads': true</code> and configure the <code>ads</code> array.
     </p>
 
     <div class="code-wrap">
       <span class="code-label">JSON</span>
-      <pre><span class="k">"ad"</span><span class="p">:</span> <span class="b">true</span><span class="p">,</span>
+      <pre><span class="k">"has_ads"</span><span class="p">:</span> <span class="b">true</span><span class="p">,</span>
 <span class="k">"ads"</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
     <span class="k">"position"</span><span class="p">:</span> <span class="s">"top"</span><span class="p">,</span>
@@ -243,7 +258,7 @@ my-shizuku-app/
   <section id="locales">
     <h2 data-i18n="loc_title">Languages &amp; Locales</h2>
     <p data-i18n="loc_p1">
-      The Shizu Store natively supports <strong>9 languages</strong>. Add translated strings under the
+      The Shizu Store natively supports <strong>11 languages</strong>. Add translated strings under the
       <code>locales</code> key using BCP 47 language codes. The store will display the appropriate locale
       based on the user's device language, falling back to <code>en</code> if unavailable.
     </p>
@@ -258,11 +273,13 @@ my-shizuku-app/
       <div class="lang-chip"><span class="code">hi</span><span class="name" data-i18n="lang_hi">Hindi</span></div>
       <div class="lang-chip"><span class="code">zh</span><span class="name" data-i18n="lang_zh">Chinese</span></div>
       <div class="lang-chip"><span class="code">ja</span><span class="name" data-i18n="lang_ja">Japanese</span></div>
+      <div class="lang-chip"><span class="code">tr</span><span class="name" data-i18n="lang_tr">Turkish</span></div>
+      <div class="lang-chip"><span class="code">cs</span><span class="name" data-i18n="lang_cs">Czech</span></div>
     </div>
 
     <div class="callout callout-success">
       <div>
-        <p data-i18n="loc_callout">You can also add <strong>any other language code</strong> under <code>locales</code> — the schema allows any BCP 47 code. Additional languages beyond the 9 listed may be displayed if the store adds support later.</p>
+        <p data-i18n="loc_callout">You can also add <strong>any other language code</strong> under <code>locales</code> — the schema allows any BCP 47 code. Additional languages beyond the 11 listed may be displayed if the store adds support later.</p>
       </div>
     </div>
 
@@ -274,10 +291,13 @@ my-shizuku-app/
         <thead><tr><th data-i18n="th_field">Field</th><th data-i18n="th_desc">Description</th></tr></thead>
         <tbody>
           <tr><td><code>app_name</code></td><td data-i18n="loc_td_app">App name in the target language</td></tr>
+          <tr><td><code>category</code></td><td data-i18n="loc_td_cat">App category in the target language</td></tr>
           <tr><td><code>short_description</code></td><td data-i18n="loc_td_short">Short listing description</td></tr>
           <tr><td><code>detailed_description</code></td><td data-i18n="loc_td_det">Long description with formatting</td></tr>
           <tr><td><code>developer_message</code></td><td data-i18n="loc_td_msg">Translated message from the developer</td></tr>
           <tr><td><code>developer_name</code></td><td data-i18n="loc_td_dev">Developer's name in target language (e.g. Arabic)</td></tr>
+          <tr><td><code>banner_url</code></td><td data-i18n="loc_td_ban">Localized banner image URL for this language</td></tr>
+          <tr><td><code>changelog</code></td><td data-i18n="loc_td_change">Translated changelog for this language</td></tr>
         </tbody>
       </table>
     </div>
@@ -454,7 +474,7 @@ EOF</pre>
     </details>
 
     <details>
-      <summary data-i18n="faq_4_q">Do I have to include all 9 languages?</summary>
+      <summary data-i18n="faq_4_q">Do I have to include all 11 languages?</summary>
       <div class="faq-body">
         <p data-i18n="faq_4_a">No. You can include as many or as few locales as you want. Any locale you omit will automatically fall back to the root-level values.</p>
       </div>
